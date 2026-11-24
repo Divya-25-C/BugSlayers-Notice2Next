@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f7f2e6">
+  <title>Notice2Next | Campus notices to approved reminders</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="/" aria-label="Notice2Next home">
+      <span class="brand-mark">N</span><span>Notice2Next</span>
+    </a>
+    <span class="track-tag">Track 1 · MCP</span>
+  </header>
+
+  <main class="page-shell">
+    <section class="intro">
+      <p class="eyebrow">Campus notice to personal action</p>
+      <h1>Catch the date.<br><span>Keep the source.</span></h1>
+      <p class="intro-copy">Upload a notice or paste its text. Notice2Next finds date mentions, shows the page evidence, and lets you approve a reminder in a local demo calendar.</p>
+    </section>
+
+    <div class="workspace-grid">
+      <section class="panel input-panel" aria-labelledby="input-heading">
+        <div class="panel-heading">
+          <div><p class="eyebrow">Step 1</p><h2 id="input-heading">Add a notice</h2></div>
+          <button id="sample-button" class="quiet-button" type="button">Load sample</button>
+        </div>
+        <form id="notice-form">
+          <label class="file-drop" for="notice-file">
+            <span class="upload-icon" aria-hidden="true">↑</span>
+            <strong>Choose a PDF or text file</strong>
+            <span>Up to 8 MB · text-based PDFs work best</span>
+            <input id="notice-file" name="file" type="file" accept=".pdf,.txt,.md,application/pdf,text/plain">
+          </label>
+          <div class="divider"><span>or paste text</span></div>
+          <label for="notice-text" class="sr-only">Notice text</label>
+          <textarea id="notice-text" name="text" rows="7" placeholder="Paste the notice text here…"></textarea>
+          <div class="form-actions">
+            <button id="analyze-button" class="primary-button" type="submit">Find dates and actions</button>
+            <button id="clear-button" class="quiet-button" type="button">Clear</button>
+          </div>
+        </form>
+        <p id="status" class="status" role="status" aria-live="polite">Your file is read in memory and is not saved by this app.</p>
+        <div class="voice-box">
+          <div><strong>Voice input</strong><p id="voice-status">Optional ElevenLabs support can be enabled in the local setup.</p></div>
+          <button id="record-button" class="secondary-button" type="button" disabled>Record question</button>
+        </div>
+        <p class="privacy-note">When ElevenLabs is configured, recording is sent only after you confirm. The browser app never receives your API key.</p>
+      </section>
+
+      <section class="panel results-panel" aria-labelledby="results-heading">
+        <div class="panel-heading">
+          <div><p class="eyebrow">Step 2</p><h2 id="results-heading">Review the evidence</h2></div>
+          <span id="result-count" class="count-badge">0 found</span>
+        </div>
+        <p id="results-empty" class="empty-state">Date suggestions appear here with the page and source sentence that supports them.</p>
+        <div id="candidate-list" class="candidate-list"></div>
+      </section>
+    </div>
+
+    <section class="panel calendar-panel" aria-labelledby="calendar-heading">
+      <div class="panel-heading">
+        <div><p class="eyebrow">Step 3</p><h2 id="calendar-heading">Demo calendar</h2></div>
+        <button id="clear-calendar" class="quiet-button" type="button">Clear demo calendar</button>
+      </div>
+      <p class="calendar-hint">Approving a reminder adds it to this browser only. No external calendar is changed.</p>
+      <div id="calendar-list" class="calendar-list"></div>
+      <p id="calendar-empty" class="empty-state compact">No approved reminders yet.</p>
+    </section>
+
+    <footer class="site-footer">
+      <span>Notice2Next · Bug Slayers</span>
+      <span>Prototype: source-linked suggestions, human approval, no automatic writes</span>
+    </footer>
+  </main>
+
+  <template id="candidate-template">
+    <article class="candidate-card">
+      <div class="candidate-meta"><span class="candidate-kind"></span><span class="candidate-page"></span></div>
+      <label class="field-label">Reminder title<input class="candidate-title" type="text" maxlength="120"></label>
+      <label class="field-label">Reminder date<input class="candidate-date" type="date"></label>
+      <blockquote class="evidence"></blockquote>
+      <div class="candidate-actions">
+        <button class="secondary-button read-button" type="button">Read summary</button>
+        <button class="primary-button approve-button" type="button">Approve reminder</button>
+      </div>
+      <p class="candidate-note">Check the excerpt and date before approval.</p>
+    </article>
+  </template>
+  <script src="/app.js" defer></script>
+</body>
+</html>
